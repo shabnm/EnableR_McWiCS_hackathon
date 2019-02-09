@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>EnableR Forms</h2>
+	
+  user_input:<br>
+  <input type="text" id="user_input" value="">
+  <br>
+  Date of travel:<br>
+  <input type="date" name="date_of_travel" value="">
+  <br>
+  From:<br>
+  <input type="text" name="From" value="">
+  <br>
+  To:<br>
+  <input type="text" name="To" value="">
+  <br><br>
+  <input type="submit" value="Submit">
+
+<script type="text/javascript">
+
+  function envoke_speech_converter(var name)
+  {
+
+       var txt1 = document.getElementById(name)
+  }
+  </script>
+
+<script>
+    window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+    let finalTranscript = '';
+    let recognition = new window.SpeechRecognition();
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 10;
+    recognition.continuous = false;
+    recognition.onresult = (event) => {
+      let interimTranscript = '';
+      for (let i = event.resultIndex, len = event.results.length; i < len; i++) {
+        let transcript = event.results[i][0].transcript;
+        if (event.results[i].isFinal) {
+          finalTranscript += transcript;
+        } else {
+          interimTranscript += transcript;
+        }
+      }
+      <!-- document.querySelector('body').innerHTML = finalTranscript + '<i style="color:#ddd;">' + interimTranscript + '</>'; -->
+	document.getElementById("user_input").value = finalTranscript;
+    }
+    recognition.start()
+	recognition.onend()
+  </script>
+
+</body>
+</html>
