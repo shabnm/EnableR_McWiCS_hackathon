@@ -7,4 +7,6 @@ To, from and the date of travel from speech to text conversion
 
 Extracting data from the text, taken from above process, to search through data set to suggest most appropriate route to the user.
 
-use format for initial input : "From" to "To" on "yyyy-mm-dd"
+use format for initial input : "From" to "To" on "Day"
+
+Taking input from user and doing information retrieval from the data and returming the result
