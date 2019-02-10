@@ -3,12 +3,15 @@
 <body>
 
 <h2>EnableR Forms</h2>
- 
+<br>
+<!--<input type="text" id="text"/>-->
+<button onclick="play()"> Play me First </button>
+<br>
   user_input:<br>
   <input type="text" id="user_input" value="">
   <br>
-  Date of travel:<br>
-  <input type="date" id="date_of_travel" value="">
+  Day of travel:<br>
+  <input type="text" id="date_of_travel" value="">
   <br>
   From:<br>
   <input type="text" id="From" value="">
@@ -16,6 +19,35 @@
   To:<br>
   <input type="text" id="To" value="">
   <br>
+  Results:<br>
+  <input type="text" id="Results" value="">
+<br>
+
+<script>
+            function play(){
+		
+	    var url = 'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en&q='+text;
+            var a = new Audio(url);
+                a.play();
+            }
+	
+	    function data(To, From, Day){
+		var result = []
+	    	var dict = {"T-M_Express": ["Toronto","Montreal", "Monday", "Tuesday", "Sunday"]
+			,"O-T Express": ["Ontario", "Toronto", "Tuesday", "Wednesday", "Saturday"]
+			,"Toronto superfast" : ["Toronto", "Montreal", "Tuesday"]};
+		for (key in dict){
+		console.log(dict[key].includes(To));
+		if (dict[key].includes(To)==true & dict[key].includes(From)==true & dict[key].includes(Day)==true){
+			result.push(key);
+		}
+		else{
+			continue;
+		}}
+		return result;
+}
+	    
+</script>
 
 <script>
 
@@ -42,16 +74,26 @@
 	var txt2 = txt1.split(" ");
 	document.getElementById("From").value = txt2[0];
 	document.getElementById("To").value = txt2[2];
-	document.getElementById("date_of_travel").value = txt2[4]+"-"+txt2[5]+"-"+txt2[6];
+	document.getElementById("date_of_travel").value = txt2[4];
+	var train_details = data(txt2[2] , txt2[0], txt2[4]);
+	console.log(train_details);
+	document.getElementById("Results").value = train_details;
+	var url = 'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en&q='+train_details;
+        var a = new Audio(url);
+        a.play();
   	}
 	recognition.onspeechend = function() {
   		recognition.stop();
   	console.log('Speech recognition has stopped.');
+	<!--var day = document.getElementById("date_of_travel").value.getDay();-->
+	
 }
 </script>
+<script>
+	
+	
 
-<script>		
+
 </script>
-
 </body>
 </html>
