@@ -3,37 +3,29 @@
 <body>
 
 <h2>EnableR Forms</h2>
-	
+ 
   user_input:<br>
   <input type="text" id="user_input" value="">
   <br>
   Date of travel:<br>
-  <input type="date" name="date_of_travel" value="">
+  <input type="date" id="date_of_travel" value="">
   <br>
   From:<br>
-  <input type="text" name="From" value="">
+  <input type="text" id="From" value="">
   <br>
   To:<br>
-  <input type="text" name="To" value="">
-  <br><br>
-  <input type="submit" value="Submit">
-
-<script type="text/javascript">
-
-  function envoke_speech_converter(var name)
-  {
-
-       var txt1 = document.getElementById(name)
-  }
-  </script>
+  <input type="text" id="To" value="">
+  <br>
 
 <script>
+
     window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
     let finalTranscript = '';
     let recognition = new window.SpeechRecognition();
     recognition.interimResults = false;
     recognition.maxAlternatives = 10;
     recognition.continuous = false;
+    recognition.start();
     recognition.onresult = (event) => {
       let interimTranscript = '';
       for (let i = event.resultIndex, len = event.results.length; i < len; i++) {
@@ -46,10 +38,20 @@
       }
       <!-- document.querySelector('body').innerHTML = finalTranscript + '<i style="color:#ddd;">' + interimTranscript + '</>'; -->
 	document.getElementById("user_input").value = finalTranscript;
-    }
-    recognition.start()
-	recognition.onend()
-  </script>
+	var txt1 = document.getElementById("user_input").value;
+	var txt2 = txt1.split(" ");
+	document.getElementById("From").value = txt2[0];
+	document.getElementById("To").value = txt2[2];
+	document.getElementById("date_of_travel").value = txt2[4]+"-"+txt2[5]+"-"+txt2[6];
+  	}
+	recognition.onspeechend = function() {
+  		recognition.stop();
+  	console.log('Speech recognition has stopped.');
+}
+</script>
+
+<script>		
+</script>
 
 </body>
 </html>
