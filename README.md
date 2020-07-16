@@ -1,4 +1,4 @@
-# ImplementAI Hackathon 2019
+# McGill women in computer science "McWiCS Hackathon" 2019
 # EnableR : Application to enable the differently abled people
 
 Steps for user: 
